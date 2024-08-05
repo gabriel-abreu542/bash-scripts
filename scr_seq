@@ -1,0 +1,40 @@
+#!/bin/bash
+# script_SEQ - emulates the function of the seq command (counts and displays all integers between two numbers given as parameters).
+# If only one number is given, it displays all numbers between 1 and the given number.
+
+# Variable declarations
+op=+            # Initially, the operation is addition, unless the user provides two numbers in descending order
+start=1
+end=${1:-1}     # If the user provides only one number, the range is from 1 to the given number
+
+# Check if at least one number is given as an argument
+if [ $# -eq 0 ]
+then
+        echo "Please enter at least one number"
+        exit
+fi
+
+# Check if any of the numbers is non-positive
+if [ $1 -le 0 ] || { [ -n "$2" ] && [ $2 -le 0 ]; }
+then
+        echo "Only positive numbers"
+        exit
+fi
+
+# If two numbers are given, each is stored in a variable ("start" and "end", respectively)
+[ "$2" ] && {
+        start=$1
+        end=$2
+}
+
+# If "start" is greater than "end", perform subtraction for the operation
+[ $start -gt $end ] && op=-
+
+# Count and display each number
+while [ $start -ne $end ]; do
+        echo $start
+        eval "start=\$((start $op 1))"
+done
+
+# Display the last number
+echo $end
