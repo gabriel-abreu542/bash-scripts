@@ -3,7 +3,8 @@
 # calculator.sh - Simulates a calculator in shell, with the 4 basic operations (addition, subtraction, multiplication, and division)
 
 # er_num = Regular expression that represents any number, integer or decimal
-er_num="^-?[0-9]+(\.[0-9]+)?$" # Used to check if the user entered a valid number
+er_num="^-?[0-9]*(.)?[0-9]+$" # Used to check if the user entered a valid number
+
 # er_op = Regular expression that represents any number from 1 to 4
 er_op="^[1-4]$" # Used to check if the user selected a valid option
 
